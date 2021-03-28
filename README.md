@@ -13,4 +13,4 @@ The Weather-app is a project to support users in finding the current weather for
 
 A live demo of the app is available at [here](https://tdetweiler.github.io/weather-app).
 
-Please note that the input suggestion dropdown is powered by Google Maps Places autocomplete and is limited to ~2000 requests a day to prevent billing. Along with that the (weather api)[https://openweathermap.org/api] this project uses is also rate limited and so a working app can not be promised if these limits are hit.
+Please note that the input suggestion dropdown is powered by Google Maps Places autocomplete and is limited to ~2000 requests a day to prevent billing. Along with that the [weather api](https://openweathermap.org/api) this project uses is also rate limited and so a working app can not be promised if these limits are hit.
