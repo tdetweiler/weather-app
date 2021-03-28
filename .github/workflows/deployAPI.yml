@@ -1,0 +1,28 @@
+# doesn't work yet as google-github-actions/deploy-appengine doesn't support custom env variables
+# current solution would expose secret api key to source control :(
+# https://github.com/google-github-actions/deploy-appengine/issues/24
+name: Build and Deploy
+on:
+  push:
+    branches:
+      - doesntExist
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2.3.1
+
+      - name: Install Dependencies
+        working-directory: ./api
+        run: |
+          yarn install --frozen-lockfile
+          yarn build
+
+      - name: Deploy to App Engine
+        uses: google-github-actions/deploy-appengine@v0.2.0
+        with:
+          working_directory: ./api
+          project_id: ${{ secrets.GCP_PROJECT }}
+          credentials: ${{ secrets.GCP_SA_KEY }}
+          version: v1

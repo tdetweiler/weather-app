@@ -1,0 +1,17 @@
+.container {
+  margin-top: 30px;
+}
+
+.spinner {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.location-header {
+  margin-top: 30px;
+}
+
+.clarification {
+  font-size: 6px;
+}
