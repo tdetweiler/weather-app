@@ -8,8 +8,9 @@ import WeatherGif from './components/WeatherGif';
 import weatherGifs from './constants';
 import './App.css';
 
+// Demo url and local
 const apiUrl = process.env.NODE_ENV === 'production'
-  ? 'https://video-browser-304606.uc.r.appspot.com/'
+  ? 'https://video-browser-304606.uc.r.appspot.com/v1'
   : 'http://localhost:8000/v1';
 
 function App() {
