@@ -1,5 +1,3 @@
-![](https://media.giphy.com/media/5W5TOAKuoZfa0/giphy.gif)
-
 # Weather-App client
 
 The Weather-app client is a react app built to allow users to enter a city of their choice and get current weather information for it.

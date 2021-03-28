@@ -1,5 +1,3 @@
-![](https://media.giphy.com/media/dWLREYF83ciQg/giphy.gif)
-
 # Weather-App api
 
 The Weather-app api is a lightweight RESTFUL API built ontop of Node for fetching a locations current weather. It is intended to be used with the Weather-App's react client app.
