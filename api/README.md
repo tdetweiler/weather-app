@@ -26,14 +26,14 @@ yarn install
 
 <details>
 <summary>Example Request</summary>
-```bash
+<pre>
 curl --location --request GET 'http://localhost:8000/v1/weather?location=Tacoma,WA,USA'
-```
+</pre>
 </details>
 
 <details>
 <summary>Example Response</summary>
-```json
+<pre>
 {
   "body": {
     "weatherTitle": "Clear",
@@ -45,7 +45,7 @@ curl --location --request GET 'http://localhost:8000/v1/weather?location=Tacoma,
     "wind": 3.44
   }
 }
-```
+</pre>
 </details>
 
 ## Running locally

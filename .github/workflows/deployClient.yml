@@ -1,8 +1,9 @@
+# Also not working how I hoped with react apps. :(
 name: Build and Deploy
 on:
   push:
     branches:
-      - master
+      - doesntExist
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest

@@ -6,12 +6,12 @@ The Weather-app is a project to support user's in finding the current weather fo
 
 ## Repositories
 
-- [API](./api/README.md): The details for the node backend can be found [here]((./api/README.md)
-- [Client](./client/README.md): The details for the react app can be found [here]((./client/README.md)
+- [API](./api/): The details for the node backend can be found [here](./api/README.md)
+- [Client](./client/): The details for the react app can be found [here](./client/README.md)
 
 ## Live demo
 
-A live demo of the app is available at [here]().
+A live demo of the app is available at [here](https://tdetweiler.github.io/weather-app).
 
 Please note that the input selection box is supported by Google Maps Places autocomplete and is limited to ~2000 requests a day to prevent billing. Along with that the (weather api)[https://openweathermap.org/api] this project uses is also rate limited and so a working app can not be promised if these limits are hit.
 

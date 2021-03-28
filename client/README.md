@@ -6,7 +6,7 @@ The Weather-app client is a react app built to allow users to enter a city of th
 
 ## Demo
 
-A live demo of the app is available at [here]().
+A live demo of the app is available at [here](https://tdetweiler.github.io/weather-app).
 
 Please note that the input selection box is supported by Google Maps Places autocomplete and is limited to ~2000 requests a day to prevent billing. Along with that the (weather api)[https://openweathermap.org/api] this project uses is also rate limited and so a working app can not be promised if these limits are hit.
 

@@ -1,6 +1,7 @@
 {
   "name": "client",
   "version": "0.1.0",
+  "homepage": "https://tdetweiler.github.io/weather-app",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.1.5",
@@ -8,15 +9,19 @@
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.8.3",
     "axios": "^0.21.1",
+    "gh-pages": "^3.1.0",
     "lodash.sample": "^4.2.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-places-autocomplete": "^7.3.0",
     "react-scripts": "4.0.3",
     "react-spinners": "^0.10.6",
+    "serve": "^11.3.2",
     "web-vitals": "^1.1.1"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
