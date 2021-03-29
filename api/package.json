@@ -5,7 +5,8 @@
   "scripts": {
     "gcp-build": "tsc",
     "build": "tsc",
-    "start": "yarn build && nodemon -r dotenv/config --exec node ./built/server.js",
+    "start": "node ./built/server.js",
+    "startdev": "yarn build && nodemon -r dotenv/config --exec node ./built/server.js",
     "test": "jest --watch",
     "lint": "eslint src/*"
   },

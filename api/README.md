@@ -47,7 +47,7 @@ curl --location --request GET 'http://localhost:8000/v1/weather?location=Tacoma,
 </details>
 
 ## Running locally
-`yarn start` - runs project locally
+`yarn startdev` - runs project locally
 
 ## Testing locally
 `yarn test` - executes unit tests
