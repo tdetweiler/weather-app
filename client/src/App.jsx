@@ -58,7 +58,7 @@ function App() {
       <h2 className="ui header">The Greatest* Weather App</h2>
       <span className="clarification">*This claim is certainly and greatly exaggerated.</span>
       <SearchBar onFormSubmit={onLocationSubmit} weatherError={weatherError} />
-      <div className="ui grid">
+      <div className="ui two column stackable grid">
         <div className="ui row">
           <ClipLoader css={spinnerOverride} color="blue" loading={loading} size={150} />
           <div className="sixteen wide column">
@@ -70,7 +70,7 @@ function App() {
             ) : ''}
           </div>
         </div>
-        <div className="ui row">
+        <div className="ui two column row">
           <div className="eight wide column">
             <WeatherGif weatherGif={weatherGif} />
           </div>

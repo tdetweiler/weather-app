@@ -1,6 +1,6 @@
 # Weather-App api
 
-The Weather-app api is a lightweight RESTFUL API built ontop of Node for fetching a locations current weather. It is intended to be used with the Weather-App's react client app.
+The Weather-app api is a lightweight RESTFUL API built ontop of Node/Typescript for fetching a locations current weather. It is intended to be used with the Weather-App's react client app.
 
 ## Requirements
 
@@ -47,7 +47,7 @@ curl --location --request GET 'http://localhost:8000/v1/weather?location=Tacoma,
 </details>
 
 ## Running locally
-`yarn startdev` - runs project locally
+`yarn start` - runs project locally
 
 ## Testing locally
 `yarn test` - executes unit tests
