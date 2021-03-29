@@ -1,49 +1,50 @@
-import axios from 'axios';
-import { getWeather } from './weather';
+import axios, { AxiosError, AxiosResponse } from 'axios';
+import { fetchWeather } from './weather';
 
 jest.mock('axios');
+const mockedAxios = axios as jest.Mocked<typeof axios>;
 
 describe('WeatherModel', () => {
-  afterEach(() => {
-    jest.clearAllMocks();
-  });
+  describe('fetchWeather', () => {
+    afterEach(() => {
+      jest.clearAllMocks();
+    })
 
-  describe('getWeather', () => {
     it('should return an error axios crashes', async () => {
       const requestError = 'it crashed';
-      axios.get.mockImplementationOnce(() => { throw new Error(requestError); });
+      mockedAxios.get.mockImplementationOnce(() => { throw new Error(requestError); });
 
-      const result = await getWeather('test');
-      expect(axios.get).toHaveBeenCalledTimes(1);
+      const result = await fetchWeather('test');
+      expect(mockedAxios.get).toHaveBeenCalledTimes(1);
       expect(result).toEqual({ error: true, data: requestError });
     });
 
     it('should return an error response from axios', async () => {
       const requestError = 'no city';
-      const axiosError = new Error('some message');
+      const axiosError = new Error('some message') as AxiosError;
       axiosError.response = {
         data: {
           message: requestError
         },
         status: 404
-      };
-      axios.get.mockImplementationOnce(() => { throw axiosError; });
+      } as AxiosResponse;
+      mockedAxios.get.mockImplementationOnce(() => { throw axiosError; });
 
-      const result = await getWeather('test');
-      expect(axios.get).toHaveBeenCalledTimes(1);
+      const result = await fetchWeather('test');
+      expect(mockedAxios.get).toHaveBeenCalledTimes(1);
       expect(result).toEqual({ error: true, data: requestError, status: 404 });
     });
 
     it('should return an error when request stalls from axios', async () => {
-      const axiosError = new Error('some message');
+      const axiosError = new Error('some message') as AxiosError;
       const requestExample = {
         url: 'blah blah'
       };
       axiosError.request = requestExample;
-      axios.get.mockImplementationOnce(() => { throw axiosError; });
+      mockedAxios.get.mockImplementationOnce(() => { throw axiosError; });
 
-      const result = await getWeather('test');
-      expect(axios.get).toHaveBeenCalledTimes(1);
+      const result = await fetchWeather('test');
+      expect(mockedAxios.get).toHaveBeenCalledTimes(1);
       expect(result).toEqual({ error: true, data: requestExample });
     });
 
@@ -102,10 +103,10 @@ describe('WeatherModel', () => {
         wind: 1.54
       };
 
-      axios.get.mockImplementationOnce(() => ({ data: exampleResponse }));
+      mockedAxios.get.mockImplementationOnce(() => (Promise.resolve({ data: exampleResponse } as AxiosResponse)));
 
-      const result = await getWeather('test');
-      expect(axios.get).toHaveBeenCalledTimes(1);
+      const result = await fetchWeather('test');
+      expect(mockedAxios.get).toHaveBeenCalledTimes(1);
       expect(result).toEqual({ error: false, data: formattedResponse });
     });
   });

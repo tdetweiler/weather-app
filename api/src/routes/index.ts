@@ -1,7 +1,7 @@
-import express from 'express';
+import * as express from 'express';
+import { getWeather } from '../controllers/weather';
 
 const indexRouter = express.Router();
-const WeatherController = require('../controllers/weather');
 
 /**
  * GET /weather route
@@ -9,6 +9,6 @@ const WeatherController = require('../controllers/weather');
  *
  * @return {JSON} Object with current weather for location
  * */
-indexRouter.get('/weather', WeatherController.getWeather);
+indexRouter.get('/weather', getWeather);
 
 export default indexRouter;

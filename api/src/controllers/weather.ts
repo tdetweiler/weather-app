@@ -1,7 +1,12 @@
-import { getWeather } from '../models/weather';
+import * as express from 'express';
+import { fetchWeather } from '../models/weather';
 
-exports.getWeather = async (req, res) => {
-  const { location } = req.query;
+export type getWeatherQuery = {
+  location: string
+}
+
+export const getWeather = async (req: express.Request, res: express.Response): Promise<express.Response> => {
+  const { location = '' } = req.query as getWeatherQuery;
 
   if (!location) {
     return res.status(400).json({ error: 'Location is required' });
@@ -11,7 +16,7 @@ exports.getWeather = async (req, res) => {
     return res.status(400).json({ error: 'Location must include City, State, Country' });
   }
 
-  const currentWeather = await getWeather(location);
+  const currentWeather = await fetchWeather(location);
 
   if (currentWeather.error) {
     return res.status(currentWeather.status || 500).json({ error: currentWeather.data });

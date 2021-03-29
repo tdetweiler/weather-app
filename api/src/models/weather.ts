@@ -3,7 +3,23 @@ import axios from 'axios';
 const WeatherAPI = 'https://api.openweathermap.org/data/2.5';
 const API_KEY = process.env.OPEN_WEATHER_API_KEY;
 
-export const getWeather = async (location) => {
+export type fetchWeatherResponse = {
+  data: string | currentWeatherPayload | JSON,
+  error: boolean,
+  status?: number
+}
+
+export type currentWeatherPayload = {
+  weatherTitle: String,
+  weatherDescription: String,
+  temp: Number,
+  tempMin: Number,
+  tempMax: Number,
+  humidity: Number,
+  wind: Number
+}
+
+export const fetchWeather = async (location: string): Promise<fetchWeatherResponse> => {
   try {
     const res = await axios.get(
       `${WeatherAPI}/weather?q=${location}&appid=${API_KEY}&units=imperial`
@@ -18,7 +34,7 @@ export const getWeather = async (location) => {
       tempMax: data.main.temp_max,
       humidity: data.main.humidity,
       wind: data.wind.speed
-    };
+    } as currentWeatherPayload;
 
     return { data: formattedResponse, error: false };
   } catch (err) {

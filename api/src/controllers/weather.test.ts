@@ -1,13 +1,13 @@
-import { getWeather } from '../models/weather';
-
-const WeatherController = require('./weather');
+import * as express from 'express';
+import { fetchWeather, currentWeatherPayload } from '../models/weather';
+import { getWeather } from './weather'
 
 jest.mock('../models/weather', () => ({
-  getWeather: jest.fn()
+  fetchWeather: jest.fn()
 }));
 
 const mockResponse = () => {
-  const res = {};
+  const res = {} as express.Response;
   res.status = jest.fn().mockReturnValue(res);
   res.json = jest.fn().mockReturnValue(res);
   return res;
@@ -15,22 +15,22 @@ const mockResponse = () => {
 
 describe('weatherController', () => {
   let res = mockResponse();
-  let req = { query: {} };
+  let req = { query: {} } as express.Request;
 
   beforeEach(() => {
-    getWeather.mockClear();
+    (fetchWeather as jest.Mock).mockClear();
     res = mockResponse();
-    req = { query: {} };
+    req = { query: {} } as express.Request;
   });
 
   describe('getWeather', () => {
-    it('should return an error if models request fails', async () => {
+    it('should return an error if models fetch fails', async () => {
       const requestError = 'No city found';
-      getWeather.mockReturnValue({ data: requestError, status: 404, error: true });
+      (fetchWeather as jest.Mock).mockReturnValue(Promise.resolve({ data: requestError, status: 404, error: true }));
       req.query = { location: 'Tacoma,WA,USA' };
 
-      await WeatherController.getWeather(req, res);
-      expect(getWeather).toHaveBeenCalledTimes(1);
+      await getWeather(req, res);
+      expect(fetchWeather).toHaveBeenCalledTimes(1);
       expect(res.status).toHaveBeenCalledWith(404);
       expect(res.json).toHaveBeenCalledWith({ error: requestError });
     });
@@ -38,8 +38,8 @@ describe('weatherController', () => {
     it('should return an error if missing location', async () => {
       const requestError = 'Location is required';
 
-      await WeatherController.getWeather(req, res);
-      expect(getWeather).toHaveBeenCalledTimes(0);
+      await getWeather(req, res);
+      expect(fetchWeather).toHaveBeenCalledTimes(0);
       expect(res.status).toHaveBeenCalledWith(400);
       expect(res.json).toHaveBeenCalledWith({ error: requestError });
     });
@@ -48,20 +48,20 @@ describe('weatherController', () => {
       const requestError = 'Location must include City, State, Country';
       req.query = { location: 'Bobsville' };
 
-      await WeatherController.getWeather(req, res);
-      expect(getWeather).toHaveBeenCalledTimes(0);
+      await getWeather(req, res);
+      expect(fetchWeather).toHaveBeenCalledTimes(0);
       expect(res.status).toHaveBeenCalledWith(400);
       expect(res.json).toHaveBeenCalledWith({ error: requestError });
     });
 
     it('should return successful weather request', async () => {
-      const testResponse = { weatherTitle: 'Clear' };
+      const testResponse = {} as currentWeatherPayload;
 
-      getWeather.mockReturnValue({ data: testResponse, error: false });
+      (fetchWeather as jest.Mock).mockReturnValue(Promise.resolve({ data: testResponse, error: false }));
       req.query = { location: 'Tacoma,WA,USA' };
 
-      await WeatherController.getWeather(req, res);
-      expect(getWeather).toHaveBeenCalledTimes(1);
+      await getWeather(req, res);
+      expect(fetchWeather).toHaveBeenCalledTimes(1);
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({ body: testResponse });
     });
